@@ -1,0 +1,19 @@
+h2{
+    margin:0;
+}
+
+.modalContent form{
+    display:flex;
+    gap:1rem;
+
+    input{
+        border-radius:10px;
+        border:1px solid var(--main-color);
+        padding:0 1rem;
+    }
+
+    button{
+        background-color: var(--main-color);
+        color:white;
+    }
+}

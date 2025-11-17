@@ -1,0 +1,19 @@
+.fullCalendarContainer{
+    width:100%;
+}
+
+.choice{
+    display:flex;
+    gap:2rem;
+    margin-top:2rem;
+
+    .yes{
+        background-color:forestgreen;
+        color:white;
+    }
+
+    .no{
+        background-color: crimson;
+        color:white;
+    }
+}

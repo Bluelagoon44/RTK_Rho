@@ -1,0 +1,21 @@
+main{
+    display:block;
+
+    .ingredients{
+        display:flex;
+        flex-wrap:wrap;
+        width:100%;
+        gap:2rem;
+
+        .ingredient{
+            padding:1rem;
+            background-color:white;
+            border-radius:10px;
+            flex-grow:1;
+
+            h3{
+                margin-top:0;
+            }
+        }
+    }
+}
