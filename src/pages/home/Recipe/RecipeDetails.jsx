@@ -4,6 +4,7 @@ import { getRecipeById } from "../../../services/endpoints/getRecipes"
 import { useParams } from "react-router-dom"
 import "./recipeDetails.css"
 import Recipe from "../../../components/Recipe/Recipe"
+import { Link } from "react-router-dom"
 
 const RecipeDetails = () => {
     const {idRecipe} = useParams()
@@ -23,6 +24,7 @@ const RecipeDetails = () => {
                             <img src={recipe.data.meals[0].strMealThumb} />
                             <aside>
                                 <div>
+                                    <Link to="/">{"<"} Retour</Link>
                                     <h2>{recipe.data.meals[0].strMeal}</h2>
                                     <p id="openModale" onClick={handleToggle}>+ Ajouter au planning</p>
                                 </div>

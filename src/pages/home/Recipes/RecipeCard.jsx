@@ -4,8 +4,8 @@ import Recipe from "@components/Recipe/Recipe";
 
 const RecipeCard = ({recipe}) => {
   const {toggle, handleToggle} = useToggle(false);
-  const toggleModale = (e)=>{
-    e.preventDefault()
+  const toggleModale = (e=null)=>{
+    e && e.preventDefault()
     handleToggle()
   }
 
