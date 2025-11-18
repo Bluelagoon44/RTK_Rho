@@ -4,7 +4,7 @@ import Home from './pages/home/Home'
 import Courses from './pages/courses/Courses'
 import Planning from './pages/planning/Planning'
 import Header from './components/header/Header'
-import RecipeDetails from './pages/home/Recipe/RecipeDetails'
+import RecipeDetails from './pages/Recipe/RecipeDetails'
 
 function App() {
 

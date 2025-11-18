@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
 import useToggle from "@hooks/useToggle"
-import { getRecipeById } from "../../../services/endpoints/getRecipes"
+import { getRecipeById } from "../../services/endpoints/getRecipes"
 import { useParams } from "react-router-dom"
 import "./recipeDetails.css"
-import Recipe from "../../../components/Recipe/Recipe"
+import Recipe from "../../components/Recipe/Recipe"
 import { Link } from "react-router-dom"
 
 const RecipeDetails = () => {
