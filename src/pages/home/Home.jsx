@@ -4,12 +4,13 @@ import "./home.css"
 import Recipes from "./Recipes/recipes"
 import { useOutletContext } from "react-router-dom"
 import { getRecipesByCategory } from "../../services/endpoints/getRecipes"
+import { useSelector } from "react-redux"
 
 function Home() {
   const [category, setCategory] = useState("Beef")
   const [ fetchType, setFetchType ] = useState("category")
-  const { resultSearch, setSearchResult } = useOutletContext();
-
+  const { resultSearch, setSearchResult } = useOutletContext()
+  
   useEffect(()=>{
     setFetchType("search")
   }, [resultSearch])

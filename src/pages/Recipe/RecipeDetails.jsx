@@ -13,7 +13,7 @@ const RecipeDetails = () => {
     useEffect(()=>{
         getRecipeById(idRecipe, setRecipe)
     }, [])
-    
+
     return !recipe ? 
             <p>Loading...</p>
         :

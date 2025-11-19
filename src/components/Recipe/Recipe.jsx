@@ -1,8 +1,12 @@
 import { useRef } from "react";
 import Modal from "@components/Modal/Modal";
 import RecipeModal from "@pages/home/Recipes/RecipeModal";
+import { useDispatch } from "react-redux";
+import { addIngredients } from "../../features/ingredients/ingredientSlice";
+import { addRecipe } from "../../features/recipes/recipeSlice";
 
 const Recipe = ({children, recipe, toggle, handleToggle}) => {
+  const dispatch = useDispatch()
   const dateInput = useRef();
   const addToCalendar = (e)=>{
     e.preventDefault();
@@ -13,7 +17,10 @@ const Recipe = ({children, recipe, toggle, handleToggle}) => {
     if(inputDateFormated.getTime() > nextWeek.getTime() || inputDateFormated.getTime() < date.getTime()){
       console.log("Date incorrecte");
     }
-    else{
+    else{             
+      const ingredients = {...recipe, date : inputDateFormated.getTime()}
+      dispatch(addIngredients(ingredients))
+      dispatch(addRecipe(ingredients))
       handleToggle();
     }
   }
