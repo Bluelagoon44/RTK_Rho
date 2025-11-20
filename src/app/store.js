@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import ingredientsSlice from "@features/ingredients/ingredientSlice"
 import recipesSlice from "@features/recipes/recipeSlice"
 import { loggerMiddleware } from "./middlewares/loggerMiddleware";
+import tooManyIngredientsListener from "./middlewares/listeners/ingredientsListener"
 
 export const store = configureStore({
     reducer: {
@@ -9,5 +10,5 @@ export const store = configureStore({
         recipes : recipesSlice
     },
     middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware().concat(loggerMiddleware)
+        getDefaultMiddleware().prepend(tooManyIngredientsListener).concat(loggerMiddleware)
 })
