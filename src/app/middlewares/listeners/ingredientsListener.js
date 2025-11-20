@@ -1,8 +1,10 @@
-import { createListenerMiddleware } from "@reduxjs/toolkit";
+import { createListenerMiddleware, isAnyOf } from "@reduxjs/toolkit";
+import { deleteIngredientByRecipe } from "../../../features/ingredients/ingredientSlice";
+import { deleteRecipe } from "../../../features/recipes/recipeSlice";
 
-const tooManyIngredientsListener = createListenerMiddleware()
+const recipeListener = createListenerMiddleware()
 
-tooManyIngredientsListener.startListening({
+recipeListener.startListening({
     predicate: (action, currentState, previousState)=>{
         return currentState.ingredients.length > 10
     },
@@ -11,4 +13,12 @@ tooManyIngredientsListener.startListening({
     }
 })
 
-export default tooManyIngredientsListener.middleware
+recipeListener.startListening({
+    matcher:isAnyOf(deleteRecipe),
+    effect:(action, listenerApi)=>{
+        listenerApi.dispatch(deleteIngredientByRecipe(action.payload))
+    }
+})
+
+
+export default recipeListener.middleware

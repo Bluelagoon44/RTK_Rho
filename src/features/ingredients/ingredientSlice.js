@@ -21,7 +21,8 @@ const ingredientsSlice = createSlice({
                         date: action.payload.date,
                         "name": action.payload["strIngredient"+i],
                         "quantity": action.payload["strMeasure"+i],
-                        "recipe" : action.payload["strMeal"]
+                        "recipe" : action.payload["strMeal"],
+                        "idRecipe" : action.payload["idRecipe"]
                     })
                 }
             }
@@ -29,9 +30,13 @@ const ingredientsSlice = createSlice({
         deleteIngredient: (state, action)=>{
             return state.filter((ingredient)=>ingredient.id !== action.payload)
         },
+        deleteIngredientByRecipe: (state, action)=>{
+            console.log(action);
+            
+            return state.filter((ingredient)=>ingredient.idRecipe !== action.payload)
+        },
         editIngredient: (state, action)=>{
             const ingredientPos = state.findIndex(i => i.id === action.payload.id)
-            
             state[ingredientPos].quantity = action.payload.quantity
             state[ingredientPos].date = action.payload.date
         }
@@ -43,6 +48,6 @@ const ingredientsSlice = createSlice({
     }
 })
 
-export const {addIngredient, addIngredients, deleteIngredient, editIngredient} = ingredientsSlice.actions
+export const {addIngredient, addIngredients, deleteIngredient, deleteIngredientByRecipe, editIngredient} = ingredientsSlice.actions
 export const {selectIngredient} = ingredientsSlice.selectors
 export default ingredientsSlice.reducer
