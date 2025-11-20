@@ -1,6 +1,6 @@
-import { createListenerMiddleware, isAnyOf } from "@reduxjs/toolkit";
+import { createListenerMiddleware, current, isAnyOf } from "@reduxjs/toolkit";
 import { deleteIngredientByRecipe } from "../../../features/ingredients/ingredientSlice";
-import { deleteRecipe } from "../../../features/recipes/recipeSlice";
+import { addRecipe, deleteRecipe } from "../../../features/recipes/recipeSlice";
 
 const recipeListener = createListenerMiddleware()
 
@@ -20,5 +20,17 @@ recipeListener.startListening({
     }
 })
 
+recipeListener.startListening({
+    actionCreator:addRecipe,
+    effect:(action, listenerApi)=>{
+        const recipes = listenerApi.getState().recipes
+        const formatDate = (timestamp) => new Date(timestamp).toISOString().split("T")[0]
+        const dateRecipeAdded = formatDate(action.payload.date)
+        const nbRecipes = recipes.filter((recipe)=>
+            recipe.title === action.payload.strMeal && formatDate(recipe.date)===dateRecipeAdded
+        ).length
+        if(nbRecipes > 1) console.log("Vous exagérez quand même...");
+    }
+})
 
 export default recipeListener.middleware
