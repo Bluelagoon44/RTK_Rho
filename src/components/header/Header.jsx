@@ -4,20 +4,16 @@ import "./header.css"
 import Searchbar from "./Searchbar/Searchbar"
 import reactLogo from "../../assets/react.svg"
 import reduxLogo from "../../assets/redux.svg"
-import { useEffect, useState } from "react"
-import { getRecipesBySearch } from "../../services/endpoints/getRecipes"
+import { useState } from "react"
+import { useGetRecipesBySearchQuery } from "../../services/theMealDbApi"
 
 export default function Header(){
   const location = useLocation();
   const [search, setSearch] = useState("");
-  const [resultSearch, setSearchResult] = useState()
   const triggerSearchAction = (value)=>{
-    getRecipesBySearch(search, setSearchResult)
     setSearch(value)
   }
-  useEffect(()=>{
-    getRecipesBySearch(search, setSearchResult)
-  }, [search])
+  const resultSearch = useGetRecipesBySearchQuery(search)
   
   return (
     <>
@@ -43,7 +39,7 @@ export default function Header(){
             </nav>
         </header>
         <main>
-            <Outlet context={location.pathname === "/" ? {resultSearch, setSearchResult} : null}/>
+            <Outlet context={location.pathname === "/" ? {resultSearch} : null}/>
         </main>
     </>
   )

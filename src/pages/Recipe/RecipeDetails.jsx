@@ -1,18 +1,14 @@
-import { useEffect, useState } from "react"
 import useToggle from "@hooks/useToggle"
-import { getRecipeById } from "../../services/endpoints/getRecipes"
 import { useParams } from "react-router-dom"
 import "./recipeDetails.css"
 import Recipe from "../../components/Recipe/Recipe"
 import { Link } from "react-router-dom"
+import { useGetRecipeByIdQuery } from "../../services/theMealDbApi"
 
 const RecipeDetails = () => {
     const {idRecipe} = useParams()
     const {toggle, handleToggle} = useToggle(false);
-    const [recipe, setRecipe] = useState(null)
-    useEffect(()=>{
-        getRecipeById(idRecipe, setRecipe)
-    }, [])
+    const recipe = useGetRecipeByIdQuery(idRecipe)
 
     return !recipe ? 
             <p>Loading...</p>

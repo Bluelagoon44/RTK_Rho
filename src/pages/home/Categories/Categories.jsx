@@ -1,17 +1,10 @@
-import { useState } from "react"
-import { useEffect } from "react"
-import { getCategories } from "../../../services/endpoints/getCategories";
+import { useGetCategoriesQuery } from "../../../services/theMealDbApi";
 
 const Categories = ({categoryProp, setCategory}) => {
-    const [categories, setCategories] = useState([]);
-
     const changeCategory = (e)=>{        
         setCategory(e.target.innerText)
     }
-
-    useEffect(()=>{
-        getCategories(setCategories)
-    }, [])
+    const categories = useGetCategoriesQuery()
 
     return (
         <ul id="categories">

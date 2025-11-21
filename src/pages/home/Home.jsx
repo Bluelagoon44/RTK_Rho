@@ -3,29 +3,27 @@ import Categories from "./Categories/Categories"
 import "./home.css"
 import Recipes from "./Recipes/recipes"
 import { useOutletContext } from "react-router-dom"
-import { getRecipesByCategory } from "../../services/endpoints/getRecipes"
-import { useSelector } from "react-redux"
+import { useGetRecipesByCategoryQuery } from "../../services/theMealDbApi"
 
 function Home() {
   const [category, setCategory] = useState("Beef")
   const [ fetchType, setFetchType ] = useState("category")
-  const { resultSearch, setSearchResult } = useOutletContext()
+  const { resultSearch } = useOutletContext()
+  const resultCategory = useGetRecipesByCategoryQuery(category)
   
   useEffect(()=>{
     setFetchType("search")
   }, [resultSearch])
   
   useEffect(()=>{
-    getRecipesByCategory(category, setSearchResult)
     setFetchType("category")
-    setSearchResult("")
   }, [category])
 
   return (
     <>
       <section>
         <Categories categoryProp={category} setCategory={setCategory} /> 
-        <Recipes category={category} result={resultSearch} />
+        <Recipes category={category} result={fetchType === "category" ? resultCategory : resultSearch} />
       </section>
     </>
   )
